@@ -39,6 +39,9 @@
         </div>
 
     </div>
+    <?php
+    include "../controller/sessionController.php";
+    ?>
     <!--Galería-->
     <div class="row">
         <div class="three-column">

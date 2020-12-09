@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        input[type=text],
         input[type=email],
         input[type=password] {
             width: 100%;
@@ -48,12 +49,12 @@
 
     <div>
         <h3>Registrarse</h3>
-        <form action="/action_page.php" method="POST">
+        <form action="registro.php" method="POST">
             <label>Nombre</label>
-            <input type="email" id="name" name="name">
+            <input type="text" id="name" name="name">
 
             <label>Apellido</label>
-            <input type="password" id="lastname" name="lastname">
+            <input type="text" id="lastname" name="lastname">
 
             <label>Email</label>
             <input type="email" id="email" name="email">
@@ -66,6 +67,19 @@
 
             <input type="submit" value="Registrar">
         </form>
+    
+
+    <?php
+        require_once '../model/userDAO.php';
+        if (isset($_POST['email'])) {
+            $registrodao = new UserDao();
+            $registro = $registrodao->registro();
+        }
+        require_once '../model/userDAO.php';
+        if (isset($_GET['mens'])) {
+            echo "Error con los datos introducidos";
+        }
+    ?>
     </div>
 
 

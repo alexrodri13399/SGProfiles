@@ -9,8 +9,9 @@
         public $status;
         public $profile;
 
-        function __construct(){
-
+        function __construct($email,$password){
+                $this->email=$email;
+                $this->password=$password;
         }
         
         /**

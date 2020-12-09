@@ -48,7 +48,7 @@
 
     <div>
         <h3>Iniciar Sesion</h3>
-        <form action="/action_page.php" method="POST">
+        <form action="../controller/loginController.php" method="POST">
             <label>Email</label>
             <input type="email" id="email" name="email">
 
@@ -60,6 +60,19 @@
         <form action="registro.php">
             <input type="submit" value="Registrarse">
         </form>
+
+        <?php
+        require_once '../model/userDAO.php';
+        if (isset($_GET['mens'])) {
+            if ($_GET['mens']==1) {
+                echo "Usuario creado correctamente.";
+            } else if ($_GET['mens']==2) {
+                echo "Usuario temporalmente bloqueado.";
+            } else {
+                echo "Email o contraseña incorrecto.";
+            }
+        }
+        ?>
     </div>
 
 
