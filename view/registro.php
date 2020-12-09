@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/validacion.js"></script>
     <title>Document</title>
     <style>
         input[type=text],
@@ -49,7 +50,7 @@
 
     <div>
         <h3>Registrarse</h3>
-        <form action="registro.php" method="POST">
+        <form action="registro.php" method="POST" id="form">
             <label>Nombre</label>
             <input type="text" id="name" name="name">
 
@@ -66,6 +67,7 @@
             <input type="password" id="passwd2" name="passwd2">
 
             <input type="submit" value="Registrar">
+            <p id="message"></p>
         </form>
     
 

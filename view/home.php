@@ -13,11 +13,9 @@
 
 <body>
     <!--Menú de navegación-->
-    <ul>
-        <li><a href="#">@username</a></li>
-        <li><a href="#" onclick="openModal()">+</a></li>
-        <li><a href="#">logout</a></li>
-    </ul>
+    <?php
+    include "../controller/sessionController.php";
+    ?>
     <!--Menú de navegación-->
     <div id="myModal" class="modal">
 
@@ -28,43 +26,55 @@
                 <h2>Crear Post</h2>
             </div>
             <div class="modal-body">
-                <form action="../controller/postController.php" method="POST" enctype="multipart/form-data">
+                <form action="home.php" method="POST" enctype="multipart/form-data">
                     <input type="text" id="title" name="title" placeholder="Título de la foto ...">
 
-                    <input type="file" id="img" name="img">
+                    <input type="file" id="img" name="img" accept="image/*">
 
                     <input type="submit" value="Crear ">
                 </form>
             </div>
         </div>
+        <?php
+        require_once '../model/postsDAO.php';
+        if (isset($_POST['title'])) {
+            $postsdao = new PostsDao();
+            $posts = $postsdao->crearPost();
+        }
+        ?>
 
     </div>
-    <?php
-    include "../controller/sessionController.php";
-    ?>
+
     <!--Galería-->
     <div class="row">
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
-        <div class="three-column">
-            <img src="../public/WhatsApp Image 2020-11-04 at 16.03.59.jpeg" alt="">
-        </div>
+        <?php
+        require_once '../model/postsDAO.php';
+        if ($_SESSION['profile'] == 1) {
+            if (isset($_POST['orden'])) {
+                if ($_POST['orden'] == "") {
+                    $postsdao = new PostsDao();
+                $posts = $postsdao->mostrar();
+                } else {
+                    $postsdao = new PostsDao();
+                    $posts = $postsdao->mostrarfiltro($_POST['orden']);
+                }
+            } else {
+                $postsdao = new PostsDao();
+                $posts = $postsdao->mostrar();
+            }
+        } elseif ($_SESSION['profile'] == 2) {
+            echo "<div class='one-column'>";
+            echo "<a style='text-decoration: none;color: gray;' href='adminpubli.php'><h1>Administrar Publicaciones</h1></a>";
+            echo "</div>";
+        } else {
+            echo "<div class='two-column'>";
+            echo "<a style='text-decoration: none;color: gray;' href='adminpubli.php'><h1>Administrar Publicaciones</h1></a>";
+            echo "</div>";
+            echo "<div class='two-column'>";
+            echo "<a style='text-decoration: none;color: gray;' href='adminusers.php'><h1>Administrar Usuarios</h1></a>";
+            echo "</div>";
+        }
+        ?>
     </div>
 
 </body>

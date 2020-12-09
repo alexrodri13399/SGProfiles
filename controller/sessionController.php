@@ -4,20 +4,15 @@ session_start();
 if (!isset($_SESSION['name'])) {
     header('Location:../view/login.php');
 }
-echo $_SESSION['name'];
-echo $_SESSION['email'];
-echo $_SESSION['id'];
-echo $_SESSION['profile'];
-/* echo '<div class="row">';
-echo '<div class="one-columnsesion">';
-echo '<div class="three-column">';
-echo '<h2 style="color:white;font-size:20px;margin-top:23px;">Bienvenido '.$_SESSION['nombre_empleado'].'</h2>';
-echo '</div>';
-echo '<div style="text-align:center;" class="three-column">';
-echo '<img style="width:100px;" src="../img/logo.png">';
-echo '</div>';
-echo '<div class="three-column">';
-    echo'<h2 style="float: right;"><a style="text-decoration:none; color: white; font-size:15px;margin-top:23px;" href="../controller/logoutController.php">Cerrar Sesión</a></h2>';
-echo '</div>';
-echo '</div>';
-echo '</div>'; */
+if ($_SESSION['profile'] == 2 || $_SESSION['profile'] == 3) {
+    echo "<ul>";
+    echo "<li style='width:50%;'><a href='home.php'>" . $_SESSION['name'] . "</a></li>";
+    echo "<li style='width:50%;'><a href='../controller/logoutController.php'>logout</a></li>";
+    echo "</ul>";
+} else {
+    echo "<ul>";
+    echo "<li><a href='#'>" . $_SESSION['name'] . "</a></li>";
+    echo "<li><a href='#' onclick='openModal()'>+</a></li>";
+    echo "<li><a href='../controller/logoutController.php'>logout</a></li>";
+    echo "</ul>";
+}
